@@ -15,6 +15,6 @@ def resnet50(**kwargs):
     model.fc = torch.nn.Linear(num_ftrs, 880)
 
     checkpoint = 'https://cumberland.isis.vanderbilt.edu/gordon/model_best.pth.tar'
-    model.load_state_dict(torch.hub.load_state_dict_from_url(checkpoint, progress=False))
+    model.load_state_dict(torch.hub.load_state_dict_from_url(checkpoint, progress=False), strict=False)
 
     return model
