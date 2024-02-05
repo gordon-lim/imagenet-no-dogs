@@ -18,7 +18,8 @@ def resnet50(**kwargs):
     checkpoint = 'https://cumberland.isis.vanderbilt.edu/gordon/model_best.pth.tar'
 
     # original saved file with DataParallel
-    state_dict = torch.hub.load_state_dict_from_url(checkpoint, progress=False)
+    checkpoint = torch.hub.load_state_dict_from_url(checkpoint, progress=False)
+    state_dict = checkpoint['state_dict']
     # create new OrderedDict that does not contain `module.`
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
