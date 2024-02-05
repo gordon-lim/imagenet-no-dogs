@@ -1,6 +1,7 @@
 dependencies = ['torch']
 import os
 import torch
+from collections import OrderedDict
 from torchvision.models.resnet import resnet50 as _resnet50
 
 # resnet18 is the name of entrypoint
@@ -15,6 +16,15 @@ def resnet50(**kwargs):
     model.fc = torch.nn.Linear(num_ftrs, 880)
 
     checkpoint = 'https://cumberland.isis.vanderbilt.edu/gordon/model_best.pth.tar'
-    model.load_state_dict(torch.hub.load_state_dict_from_url(checkpoint, progress=False), strict=False)
+
+    # original saved file with DataParallel
+    state_dict = torch.hub.load_state_dict_from_url(checkpoint, progress=False)
+    # create new OrderedDict that does not contain `module.`
+    new_state_dict = OrderedDict()
+    for k, v in state_dict.items():
+        name = k[7:] # remove `module.`
+        new_state_dict[name] = v
+
+    model.load_state_dict(new_state_dict)
 
     return model
