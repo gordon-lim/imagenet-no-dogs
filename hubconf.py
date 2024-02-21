@@ -15,8 +15,7 @@ def resnet50(**kwargs):
     num_ftrs = model.fc.in_features
     model.fc = torch.nn.Linear(num_ftrs, 880)
 
-    checkpoint = 
-'https://cumberland.isis.vanderbilt.edu/gordon/Weights/imagenet-no-dogs/resnet50-imagenet-no-dogs.pth.tar'
+    checkpoint = 'https://cumberland.isis.vanderbilt.edu/gordon/Weights/imagenet-no-dogs/resnet50-imagenet-no-dogs.pth.tar'
 
     # original saved file with DataParallel
     checkpoint = torch.hub.load_state_dict_from_url(checkpoint, progress=False)
