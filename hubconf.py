@@ -8,7 +8,7 @@ from torchvision.models.resnet import resnet50 as _resnet50
 # resnet18 is the name of entrypoint
 def resnet18(**kwargs):
     """ # This docstring shows up in hub.help()
-    Resnet50 model
+    Resnet18 model
     pretrained (bool): kwargs, load pretrained weights into the model
     """
     # Call the model, load pretrained weights
